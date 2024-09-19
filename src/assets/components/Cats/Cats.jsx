@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "primeicons/primeicons.css";
+import styled from "styled-components";
+import { ModalOverlay } from "../Application Form /ModalOverlay";
+import { ModalContent } from "../Application Form /ModalContent";
+import { StyledInput } from "../Application Form /StyledInput";
+import { StyledButton } from "../Application Form /StyledButton";
 
 function Cats({ className }) {
   const [cats, setCats] = useState([]);
-  const [heartClick, setHeartClick] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [selectedCat, setSelectedCat] = useState(null);
 
   const fetchCats = () => {
-    fetch("https://api.thecatapi.com/v1/images/search?limit=20", {
+    fetch("https://api.thecatapi.com/v1/images/search?limit=60", {
       method: "GET",
       headers: {
         "x-api-key":
@@ -16,7 +22,11 @@ function Cats({ className }) {
     })
       .then((response) => response.json())
       .then((result) => {
-        setCats(result);
+        const catsWithFavorite = result.map((cat) => ({
+          ...cat,
+          isFavorite: false,
+        }));
+        setCats(catsWithFavorite);
       })
       .catch((e) => console.log(e));
   };
@@ -25,8 +35,28 @@ function Cats({ className }) {
     fetchCats();
   }, []);
 
-  function handleHeartClick() {
-    setHeartClick(!heartClick);
+  function handleHeartClick(id) {
+    setCats((prevCats) =>
+      prevCats.map((cat) =>
+        cat.id === id ? { ...cat, isFavorite: !cat.isFavorite } : cat
+      )
+    );
+  }
+
+  function handleAdopt(cat) {
+    setSelectedCat(cat);
+    setModal(true);
+  }
+
+  function closeModal() {
+    setModal(false);
+    setSelectedCat(null);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log("Form submitted");
+    closeModal();
   }
 
   return (
@@ -37,6 +67,7 @@ function Cats({ className }) {
             <div className="image">
               <img src={cat.url} alt="cat image" className="container-image" />
             </div>
+            <div className="container-adopt"></div>
             {cat.breeds.length > 0 ? (
               <div className="container-informations">
                 <span>{cat.breeds[0].name}</span>
@@ -46,16 +77,53 @@ function Cats({ className }) {
                 <span>Unique Cat</span>
               </div>
             )}
-            <div className="heart-icon">
-              {heartClick ? (
-                <i className=" pi pi-heart-fill" onClick={handleHeartClick}></i>
-              ) : (
-                <i className="pi pi-heart" onClick={handleHeartClick}></i>
-              )}
+            <div className="container-adopt">
+              <div className="button">
+                <button
+                  type="button"
+                  className="button-adopt"
+                  onClick={() => handleAdopt(cat)}
+                >
+                  Adopt-me!
+                </button>
+              </div>
+              <div className="heart-icon">
+                {cat.isFavorite ? (
+                  <i
+                    className="pi pi-heart-fill"
+                    onClick={() => handleHeartClick(cat.id)}
+                  ></i>
+                ) : (
+                  <i
+                    className="pi pi-heart"
+                    onClick={() => handleHeartClick(cat.id)}
+                  ></i>
+                )}
+              </div>
             </div>
           </div>
         ))}
       </div>
+
+      {modal && (
+        <ModalOverlay>
+          <ModalContent>
+            <h2>Cat Adoption Application Form</h2>
+            <form onSubmit={handleSubmit}>
+              <StyledInput type="text" placeholder="Name" required />
+              <StyledInput type="text" placeholder="NIF" required />
+              <StyledInput type="number" placeholder="Age" required />
+              <StyledInput type="text" placeholder="Occupation" required />
+              <StyledInput type="tel" placeholder="Telephone Number" required />
+              <StyledInput type="text" placeholder="Address" required />
+              <StyledButton type="submit">Submit</StyledButton>
+              <StyledButton type="button" onClick={closeModal}>
+                Cancel
+              </StyledButton>
+            </form>
+          </ModalContent>
+        </ModalOverlay>
+      )}
     </div>
   );
 }

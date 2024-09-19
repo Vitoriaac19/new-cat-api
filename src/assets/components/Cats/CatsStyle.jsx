@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Cats from "./Cats";
-import 'primeicons/primeicons.css';
+import "primeicons/primeicons.css";
 
 export const CatsStyle = styled(Cats)`
   .container-cats {
@@ -11,6 +11,7 @@ export const CatsStyle = styled(Cats)`
     justify-content: center;
     width: 100%;
     height: 100vh;
+    margin-top: 50px;
   }
 
   .cats {
@@ -24,10 +25,12 @@ export const CatsStyle = styled(Cats)`
     margin: 10px;
     box-shadow: 0px 0px 8px hsl(0, 0%, 71%);
     border-radius: 10px;
+    background-color: #f8cf83;
   }
 
-  .cats:hover{
+  .cats:hover {
     scale: 1.1;
+    transition: 0.8s ease;
   }
 
   .image {
@@ -45,7 +48,7 @@ export const CatsStyle = styled(Cats)`
     border-radius: 10px;
   }
 
-  .container-informations{
+  .container-informations {
     position: absolute;
     width: 80%;
     height: 20%;
@@ -58,21 +61,54 @@ export const CatsStyle = styled(Cats)`
     font-size: 1.2rem;
   }
 
-.pi-heart, .pi-heart-fill{
-  position: absolute;
-  bottom: 0;
-  font-size: 1.7em;
-  color: red;
+  .pi-heart,
+  .pi-heart-fill {
+    position: absolute;
+    bottom: 0;
+    font-size: 1.7em;
+    color: red;
+  }
 
-}
+  .heart-icon {
+    width: 10%;
+    height: 10%;
+    position: absolute;
+    bottom: 15%;
+    right: 20px;
+  }
 
-.heart-icon{
-  width: 10%;
-  height: 10%;
-  position: absolute;
-  bottom: 5%;
-}
+  .container-adopt {
+    position: absolute;
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+  }
 
+  .button {
+    display: flex;
+    position: absolute;
+    width: 45%;
+    height: 45%;
+    left: 5%;
+    bottom: 17%;
+  }
 
+  .button-adopt {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    background-color: orange;
+    color: white;
+    font-size: 1em;
+    border: none;
+  }
 
+  .button-adopt:hover {
+    background-color: white;
+    color: orange;
+  }
 `;

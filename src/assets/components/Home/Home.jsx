@@ -24,16 +24,15 @@ function Home({ className }) {
       })
       .catch((e) => console.log(e));
   };
-    useEffect(() => {
-      fetchCarousel();
-    }, []);
+  useEffect(() => {
+    fetchCarousel();
+  }, []);
 
-    return (
-        <>
-        <CarouselStyle images={images}/>
-        </>
-    )
-  };
-
+  return (
+    <>
+      <CarouselStyle images={images} />
+    </>
+  );
+}
 
 export default Home;
