@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
-  width: 100%;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  width: 80%;
   padding: 10px;
   margin-top: 10px;
   background-color: orange;
