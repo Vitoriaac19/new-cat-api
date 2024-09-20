@@ -61,6 +61,11 @@ function Cats({ className }) {
 
   return (
     <div className={className}>
+      {localStorage.getItem("user") && (
+        <div className="container-search">
+          <input type="text" placeholder="Search a breed" />
+        </div>
+      )}
       <div className="container-cats">
         {cats.map((cat) => (
           <div className="cats" key={cat.id}>
@@ -104,7 +109,6 @@ function Cats({ className }) {
           </div>
         ))}
       </div>
-
       {modal && (
         <ModalOverlay>
           <ModalContent>

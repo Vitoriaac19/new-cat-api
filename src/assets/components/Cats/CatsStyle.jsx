@@ -111,4 +111,25 @@ export const CatsStyle = styled(Cats)`
     background-color: white;
     color: orange;
   }
+
+  .container-search {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 30px;
+    margin-top: 1%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 2em;
+  }
+
+  .container-search input {
+    width: 100%;
+    height: 100%;
+    border: 1px solid hsl(0, 0%, 71%);
+    border-radius: 20px;
+  }
 `;

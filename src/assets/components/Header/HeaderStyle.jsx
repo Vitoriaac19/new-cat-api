@@ -39,6 +39,8 @@ export const HeaderStyle = styled(Header)`
     cursor: pointer;
     text-decoration: none;
     color: white;
+    border: none;
+    background-color: transparent;
   }
 
   .link:hover {
